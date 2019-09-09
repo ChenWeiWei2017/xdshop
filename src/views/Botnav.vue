@@ -1,13 +1,13 @@
 <template>
   <div>
-    <transition :name="transName">
+    <!--<transition :name="transName">
       <router-view class="trans-router"></router-view>
-    </transition>
-    <cube-tab-bar
-        v-model="selectedLabelDefault"
-        @click="clickHandler"
-        @change="changeHandler" class="botnav">
-      <cube-tab v-for="(item, index) in tabs" :label="item.label" :key="item.label">
+    </transition>-->
+    <router-view></router-view>
+    <cube-tab-bar v-model="selectedLabelDefault"
+                  @click="clickHandler"
+                  @change="changeHandler" class="botnav">
+      <cube-tab v-for="(item) in tabs" :label="item.label" :key="item.label">
         <!-- name为icon的插槽 -->
         <i slot="icon" :class="item.icon"></i>
         <!-- 默认插槽 -->
@@ -42,6 +42,26 @@
         }]
       }
     },
+    created() {
+      // 根据当前路由调整selectedLabelDefault
+      switch (this.$route.path) {
+        case '/botnav/index':
+          this.selectedLabelDefault = '首页';
+          break;
+        case '/botnav/list':
+          this.selectedLabelDefault = '分类';
+          break;
+        case '/botnav/search':
+          this.selectedLabelDefault = '搜索';
+          break;
+        case '/botnav/cart':
+          this.selectedLabelDefault = '购物车';
+          break;
+        case '/botnav/mine':
+          this.selectedLabelDefault = '我的';
+          break;
+      }
+    },
     methods: {
       clickHandler (label) {
         // if you clicked home tab, then print 'Home'
@@ -72,7 +92,7 @@
   }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
   .cube-tab-bar.botnav
     position fixed
     bottom 0

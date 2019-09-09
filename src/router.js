@@ -56,12 +56,18 @@ export default new Router({
           // 嵌套路由不需要加"/"
           path: 'cart',
           name: 'cart',
+          meta: {
+            requireAuth: true // 该路由访问需要登录权限
+          },
           component: () => import('./views/Cart.vue')
         },
         {
           // 嵌套路由不需要加"/"
           path: 'Mine',
           name: 'mine',
+          meta: {
+            requireAuth: true
+          },
           component: () => import('./views/Mine.vue')
         },
       ]

@@ -1,13 +1,20 @@
 <template>
   <div id="index">
     <!-- 轮播-->
-    <cube-slide ref="slide" :data="items" @change="changePage">
+    <!--<cube-slide ref="slide" :data="items" @change="changePage">
       <cube-slide-item v-for="(item, index) in items" :key="index" @click.native="clickHandler(item, index)">
         <a :href="item.url">
           <img class="banner" :src="item.image" :alt="item.title">
         </a>
       </cube-slide-item>
-    </cube-slide>
+    </cube-slide>-->
+    <van-swipe :autoplay="3000">
+      <van-swipe-item v-for="(item, index) in items" :key="index">
+        <a :href="item.url">
+          <img class="banner" :src="item.image" :alt="item.title"/>
+        </a>
+      </van-swipe-item>
+    </van-swipe>
     <!-- 分类 -->
     <cube-slide ref="slidelists" :data="lists" :auto-play="false">
       <cube-slide-item v-for="(list, index) in lists" :key="index">
@@ -45,7 +52,7 @@
     },
     async created() {
       try {
-        const result = await this.$http.get('http://localhost:8081/pub/api/v1/banner');
+        const result = await this.$http.get('/pub/api/v1/banner');
         if (result.code == 200) {
           this.items = result.data;
         }

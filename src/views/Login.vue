@@ -28,6 +28,10 @@
             {
               type: 'input',
               modelKey: 'username',
+              clearable: {
+                visible: true,
+                blurHidden: true
+              },
               label: '用户名',
               props: {
                 placeholder: '请输入用户名'
@@ -103,7 +107,12 @@
             this.$store.commit('setToken', result.data);
             this.$setCookie('token', result.data, 7);
             // this.$showToastType('correct', '登录成功');
-            await this.$router.replace({path: '/index'});
+            if (this.$route.query.redirect) {
+              let redirectPath = this.$route.query.redirect;
+              await this.$router.replace({path: redirectPath});
+            } else {
+              await this.$router.replace({path: '/index'});
+            }
           } else {
             this.$showToastType('error', result.message);
           }
