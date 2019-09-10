@@ -94,6 +94,7 @@
       ul
         display flex
         flex-wrap wrap
+        text-align center
         li
           width 50%
           justify-content center

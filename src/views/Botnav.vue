@@ -93,6 +93,8 @@
 </script>
 
 <style lang="stylus">
+  .cube-tab_active
+    color #ee0a24
   .cube-tab-bar.botnav
     position fixed
     bottom 0
@@ -100,7 +102,7 @@
     z-index 1000
     width 100%
     background #fff
-    border-top: 1px solid #e6eaf2;
+    border-top 1px solid #e6eaf2
     .cube-tab div
         font-size 14px
         padding-top 3px
